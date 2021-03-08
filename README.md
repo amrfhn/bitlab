@@ -1,6 +1,6 @@
-# LANDKIT
+# BITLAB FE
 
-Landkit Theme by Good Themes.
+(Landkit Theme by Good Themes.)
 
 ### Documentation
 
@@ -12,6 +12,7 @@ The steps to compile and get started with development are covered in detail in d
 
 - npm install
 - npm start
+- npm build
 
 ### Design Files
 
