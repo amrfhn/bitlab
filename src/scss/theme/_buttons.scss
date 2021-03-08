@@ -20,6 +20,22 @@
   font-size: $input-btn-font-size-xs;
 }
 
+// Custom primary
+
+.btn-primary {
+  background-color: $primary;
+  color: $white;
+
+  &:hover, &:focus {
+    background-color: $primary;
+    color: darken($white, 5%);
+  }
+
+  &.active {
+    background-color: darken($primary, 5%);
+    color: darken($white, 5%);
+  }
+}
 
 // Custom colors
 
@@ -157,6 +173,11 @@
   display: block;
   line-height: 1;
   width: 1em;
+}
+
+.btn-primary.btn-lg {
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .btn-rounded-circle.btn-lg {
