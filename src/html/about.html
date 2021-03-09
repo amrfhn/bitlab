@@ -1,321 +1,188 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    {{> partials/head title="Landkit"}}
-  </head>
-  <body>
 
-    <!-- MODALS -->
-    {{> partials/modals}}
+<head>
+  {{> partials/head title="Landkit"}}
+</head>
 
-    <!-- NAVBAR -->
-    {{> partials/navbar classList="navbar-light bg-white border-bottom" container="container-fluid" button="primary"}}
+<body>
 
-    <!-- WELCOME -->
-    <section class="py-8 py-md-11 border-bottom">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-10 col-lg-8 text-center">
+  <!-- MODALS -->
+  {{> partials/modals}}
 
-            <!-- Headin -->
-            <h1 class="display-2">
-              Small team. Big hearts.
-            </h1>
+  <!-- NAVBAR -->
+  {{> partials/navbar classList="navbar-light bg-white border-bottom" container="container-fluid" button="primary"}}
 
-            <!-- Text -->
-            <p class="lead text-muted mb-7 mb-md-9">
-              Our focus is always on finding the best people to work with. Our bar is high, but you look ready to take on the challenge.
-            </p>
-
-          </div>
-        </div> <!-- / .row -->
-        <div class="row">
-          <div class="col-12">
-
-            <!-- Image -->
-            <div class="row gx-4">
-              <div class="col-4">
-
-                <img class="img-fluid rounded shadow-lg" src="assets/img/photos/photo-16.jpg" alt="...">
-
-              </div>
-              <div class="col-3">
-
-                <img class="img-fluid rounded shadow-lg mb-4" src="assets/img/photos/photo-17.jpg" alt="...">
-
-                <img class="img-fluid rounded shadow-lg" src="assets/img/photos/photo-18.jpg" alt="...">
-
-              </div>
-              <div class="col-5">
-
-                <div class="row gx-5 mb-4">
-                  <div class="col-5">
-
-                    <img class="img-fluid rounded shadow-lg" src="assets/img/photos/photo-19.jpg" alt="...">
-
-                  </div>
-                  <div class="col-7">
-
-                    <img class="img-fluid rounded shadow-lg" src="assets/img/photos/photo-20.jpg" alt="...">
-
-                  </div>
-                </div> <!-- / .row -->
-
-                <img class="img-fluid rounded shadow-lg" src="assets/img/photos/photo-21.jpg" alt="...">
-
-              </div>
-            </div>
-
-          </div>
-        </div> <!-- / .row -->
-      </div> <!-- / .container -->
-    </section>
-
-    <!-- LOCATION -->
-    <section class="pt-8 pt-md-0 border-bottom bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-6">
-
-            <!-- Map (mobile) -->
-            <div class="ratio ratio-1x1 d-md-none">
-              <div data-map='{"center": [-118.244615, 34.052979], "zoom": 12}'></div>
-            </div>
-
-            <!-- Map -->
-            <div class="position-relative h-100 vw-50 float-end d-none d-md-block">
-
-              <!-- Map -->
-              <div class="h-100 w-100" data-map='{"center": [-118.244615, 34.052979], "zoom": 12}'></div>
-
-              <!-- Shape -->
-              <div class="shape shape-end shape-fluid-y svg-shim text-light">
-                {{> angles/angle-end}}
-              </div>
-
-            </div>
-
-          </div>
-          <div class="col-12 col-md-6 col-lg-5 offset-lg-1 py-8 py-md-11 py-lg-12">
-
-            <!-- Heading -->
-            <h2>
-              Located in Los Angeles.<br>
-              <span class="text-success">Enjoy <span data-typed='{"strings": ["cultural diversity", "white sand beaches", "sunny weekends"]}'></span>.</span>
-            </h2>
-
-            <!-- Text -->
-            <p class="fs-lg text-gray-700 mb-6">
-              We picked our office location to maximize our team's enjoyment! LA's best restaurants are within walking distance, as well are some of the finest coffee shops in the world. Come visit us and you'll agree.
-            </p>
-
-            <!-- Stats -->
-            <div class="d-flex">
-              <div class="pe-5">
-                <h3 class="text-success mb-0">
-                  <span data-countup='{"startVal": 0}' data-to="100" data-aos data-aos-id="countup:in">0</span>%
-                </h3>
-                <p class="text-gray-700 mb-0">
-                  Approval
-                </p>
-              </div>
-              <div class="border-start border-gray-300"></div>
-              <div class="px-5">
-                <h3 class="text-success mb-0">
-                  <span data-countup='{"startVal": 0}' data-to="85" data-aos data-aos-id="countup:in">0</span>%
-                </h3>
-                <p class="text-gray-700 mb-0">
-                  Sunny days
-                </p>
-              </div>
-              <div class="border-start border-gray-300"></div>
-              <div class="ps-5">
-                <h3 class="text-success mb-0">
-                  <span data-countup='{"startVal": 0}' data-to="52" data-aos data-aos-id="countup:in">0</span>/<span data-countup='{"startVal": 0}' data-to="48" data-aos data-aos-id="countup:in">0</span>
-                </h3>
-                <p class="text-gray-700 mb-0">
-                  Gender ratio
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div> <!-- / .row -->
-      </div> <!-- / .container -->
-    </section>
-
-    <!-- COMPANIES -->
-    <section class="py-8 py-md-11">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-10 col-lg-7 text-center">
-
-            <!-- Heading -->
-            <h2>
-              We strive to work with the best. <br />
-              The best companies in the world.
-            </h2>
-
-            <!-- Text -->
-            <p class="fs-lg text-muted mb-7 mb-md-9">
-              Landkit is a best place to work with some of the greatest tech companies in the world.
-            </p>
-
-          </div>
-        </div> <!-- / .row -->
-        <div class="row">
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #FF5A5F;">
-              {{> logotype/airbnb}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #0081C9;">
-              {{> logotype/coinbase}}
-            </div>
-
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #DA5988;">
-              {{> logotype/dribbble}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #3F5D87;">
-              {{> logotype/instagram}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #B81D24;">
-              {{> logotype/netflix}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #CB2027;">
-              {{> logotype/pinterest}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #6772E5;">
-              {{> logotype/stripe}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #004F9D;">
-              {{> logotype/facebook}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #CB2027;">
-              {{> logotype/pinterest}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #1F8DED;">
-              {{> logotype/intercom}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #7289DA;">
-              {{> logotype/discord}}
-            </div>
-
-          </div>
-          <div class="col-4 col-md-2">
-
-            <div class="img-fluid img-fluid mb-6 mb-md-8 svg-shim" style="color: #0080FF;">
-              {{> logotype/digital-ocean}}
-            </div>
-
-          </div>
-
-        </div> <!-- / .row -->
-      </div> <!-- / .container -->
-    </section>
-
-    <!-- SLIDER -->
-    <section>
-      <div class="flickity-button-white flickity-button-inset" data-flickity='{"imagesLoaded": true, "wrapAround": true, "pageDots": false}'>
-        <div class="w-100">
+  <!-- WELCOME -->
+  <section class="py-8">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-5 col-lg-6 order-md-2">
 
           <!-- Image -->
-          <img src="assets/img/covers/cover-11.jpg" class="img-fluid w-100" alt="...">
-
-          <!-- Shape -->
-          <div class="shape shape-top shape-fluid-x svg-shim text-white">
-            {{> waves/wave-1}}
-          </div>
+          <img src="assets/img/illustrations/about-bitlab.png" class="img-fluid mw-md-120 mb-6 mb-md-0" alt="..."
+            data-aos="fade-up" data-aos-delay="100">
 
         </div>
-        <div class="w-100">
+        <div class="col-12 col-md-7 col-lg-6 order-md-1" data-aos="fade-up">
+
+          <!-- Heading -->
+          <h1 class="display-3 fw-bolder text-center text-md-start">
+            About <span class="text-primary">Bitlab</span>.
+          </h1>
+
+          <!-- Text -->
+          <p class="lead text-center text-md-start text-muted mb-6 mb-lg-8">
+            The BITLAB is evolving the way the technology drives businesses. Through innovation and collaboration, we
+            help our clients build products that grow their businesses
+          </p>
+
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+  </section>
+
+  <!-- ABOUT -->
+  <section class="py-8">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-md-6 mb-5 mb-md-0">
+
+          <!-- Images -->
+          <div class="row">
+            <div class="col-6 me-n5">
+
+              <img src="assets/img/photos/photo-31.jpg" alt="..." class="img-fluid mb-4 rounded" data-aos="fade-right"
+                data-aos-delay="100">
+
+              <img src="assets/img/photos/photo-32.jpg" alt="..." class="img-fluid rounded" data-aos="fade-right"
+                data-aos-delay="150">
+
+            </div>
+            <div class="col-6 mt-8">
+
+              <img src="assets/img/photos/photo-33.jpg" alt="..." class="img-fluid mb-4 rounded" data-aos="fade-right">
+
+              <img src="assets/img/photos/photo-34.jpg" alt="..." class="img-fluid rounded" data-aos="fade-right"
+                data-aos-delay="50">
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-5" data-aos="fade-left">
+
+          <!-- Heading -->
+          <h2 class="fw-bold">
+            Our Story
+          </h2>
+
+          <!-- Text -->
+          <p class="fs-lg text-muted mb-4">
+            Why the BITLAB? The bit is a basic unit of information in computing and digital communication. It represents
+            the beginning and forms the building blocks of great digital products.
+            </br></br>
+            At BITLAB, we're a curious bunch and enjoy experimenting with millions of bits to create the best solutions
+            and services to match our client's needs. Driven by strong leadership principles, we are constantly
+            innovating to find better ways to do what we do, and improve what is out there in the market.
+          </p>
+
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="py-8">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-5 col-lg-6 order-md-2">
 
           <!-- Image -->
-          <img src="assets/img/covers/cover-3.jpg" class="img-fluid w-100" alt="...">
-
-          <!-- Shape -->
-          <div class="shape shape-top shape-fluid-x svg-shim text-white">
-            {{> waves/wave-1}}
-          </div>
+          <img src="assets/img/illustrations/illustration-3.png" class="img-fluid mw-md-120 mb-6 mb-md-0" alt="..."
+            data-aos="fade-up" data-aos-delay="100">
 
         </div>
-      </div>
-    </section>
+        <div class="col-12 col-md-7 col-lg-6 order-md-1" data-aos="fade-up">
 
-    <!-- CTA -->
-    <section class="pt-6 pt-md-8">
-      <div class="container pb-6 pb-md-8 border-bottom">
-        <div class="row align-items-center">
-          <div class="col-12 col-md">
+          <!-- Heading -->
+          <h1 class="display-3 fw-bolder text-center text-md-start">
+            Who We Are
+          </h1>
 
-            <!-- Heading -->
-            <h3 class="fw-bold mb-1">
-              Interested in joining our team?
-            </h3>
+          <!-- Text -->
+          <p class="lead text-center text-md-start text-muted mb-6 mb-lg-8">
+            Our DNA is made of digital natives with a strong track record in building digital products and experiences
+            for top tier clients. We came together with one vision in mind: to build products that are beautiful, usable
+            and effective.
+            </br></br>
+            We don't make extravagant and overrated products and services. We build, prototype, test and repeat:
+            perfecting our craft on a daily basis and ensuring we are building what's right for our clients.
+            </br></br>
+            Our people are our secret weapon and we pride ourselves on strong collaboration within our team and with our
+            clients.
+            </br></br>
+            Have a new product idea and have no one to start building it? We're your team
+          </p>
 
-            <!-- Text -->
-            <p class="fs-lg text-muted mb-5 mb-md-0">
-              Hit us up and we'll get in touch with you.
-            </p>
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+  </section>
 
-          </div>
-          <div class="col-12 col-md-auto">
+  <!-- IMAGE -->
+  <section data-jarallax data-speed=".8" class="py-14 py-lg-16 jarallax"
+    style="background-image: url(assets/img/covers/cover-20.jpg);">
 
-            <!-- Button -->
-            <a href="#!" class="btn btn-primary lift">
-              Apply now
-            </a>
+    <!-- Shape -->
+    <div class="shape shape-top shape-fluid-x svg-shim text-white">
+      {{> angles/angle-top}}
+    </div>
 
-          </div>
-        </div> <!-- / .row -->
-      </div> <!-- / .container -->
-    </section>
+    <!-- Button -->
+    <div class="col-12 text-center">
+      <a class="btn btn-pill btn-white text-body shadow lift text-uppercase" href="#">
+        Let’s Collaborate
+      </a>
+    </div>
 
-    <!-- FOOTER -->
-    {{> partials/footer classList="bg-white"}}
+  </section>
 
-    <!-- JAVASCRIPT -->
-    {{> partials/scripts}}
+  <!-- CTA -->
+  <section class="py-6">
+    <div class="container py-8 border-top border-bottom border-light">
+      <div class="row align-items-center">
+        <div class="col-12 col-md">
 
-  </body>
+          <!-- Heading -->
+          <h3 class="fw-bold mb-1">
+            Want to join us? <span class="text-primary">See our available jobs</span>
+          </h3>
+
+          <!-- Text -->
+          <p class="fs-lg text-secondary mb-5 mb-md-0">
+            See current jobs and vacancies
+          </p>
+
+        </div>
+        <div class="col-12 col-md-auto">
+
+          <!-- Button -->
+          <a href="#!" class="btn btn-primary lift">
+            Join Us
+          </a>
+
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+  </section>
+
+  <!-- FOOTER -->
+  {{> partials/footer classList="bg-white"}}
+
+  <!-- JAVASCRIPT -->
+  {{> partials/scripts}}
+
+</body>
+
 </html>
