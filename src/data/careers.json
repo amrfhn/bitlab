@@ -1,34 +1,68 @@
 {
-    "UIDesigner": [
-        {
-            "title": "UI Designer",
-            "location":"Kuala Lumpur",
-            "positionStatus": "Full time",
-            "jobOverview": "Our DNA is made of digital natives with a strong track record in building digital products and experiences for top tier clients. We came together with one vision in mind: to build products that are beautiful, usable and effective. We don't make extravagant and overrated products and services. We build, prototype, test and repeat: perfecting our craft on a daily basis and ensuring we are building what's right for our clients. Our people are our secret weapon and we pride ourselves on strong collaboration within our team and with our clients.",
-            "responsibilities": {
-                "description": "We believe the economy is better when everyone has access. When everyone has room to grow. No one should be left out because the cost is too great or the technology too complex.",
-                "keyPoints": [
-                    "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
-                    "Consider UX from a user journey level across several brand touchpoints, as well as within specific interactions",
-                    "Design at a systems level, where components can be re-used and built to scale, optimized across different screen sizes and devices",
-                    "Iterate quickly and communicate ideas across various levels of fidelity, with the ability to receive feedback constructively as well as provide feedback to other’s work",
-                    "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
-                ]
-            },
-            "requirements": [
-                "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
-                "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
-            ]
-        }
-    ],
-    "FrontEndEngineer": [
-        {
-
-        }
-    ],
-    "BackEndEngineer": [
-        {
-
-        }
-    ]
+  "UIDesigner": [
+    {
+      "title": "UI Designer",
+      "location": "Kuala Lumpur",
+      "positionStatus": "Full time",
+      "jobOverview": "Our DNA is made of digital natives with a strong track record in building digital products and experiences for top tier clients. We came together with one vision in mind: to build products that are beautiful, usable and effective. We don't make extravagant and overrated products and services. We build, prototype, test and repeat: perfecting our craft on a daily basis and ensuring we are building what's right for our clients. Our people are our secret weapon and we pride ourselves on strong collaboration within our team and with our clients.",
+      "responsibilities": {
+        "description": "We believe the economy is better when everyone has access. When everyone has room to grow. No one should be left out because the cost is too great or the technology too complex.",
+        "keyPoints": [
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+          "Consider UX from a user journey level across several brand touchpoints, as well as within specific interactions",
+          "Design at a systems level, where components can be re-used and built to scale, optimized across different screen sizes and devices",
+          "Iterate quickly and communicate ideas across various levels of fidelity, with the ability to receive feedback constructively as well as provide feedback to other’s work",
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+        ]
+      },
+      "requirements": [
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+      ]
+    }
+  ],
+  "FrontEndEngineer": [
+    {
+      "title": "Front End Engineer",
+      "location": "Kuala Lumpur",
+      "positionStatus": "Full time",
+      "jobOverview": "Our DNA is made of digital natives with a strong track record in building digital products and experiences for top tier clients. We came together with one vision in mind: to build products that are beautiful, usable and effective. We don't make extravagant and overrated products and services. We build, prototype, test and repeat: perfecting our craft on a daily basis and ensuring we are building what's right for our clients. Our people are our secret weapon and we pride ourselves on strong collaboration within our team and with our clients.",
+      "responsibilities": {
+        "description": "We believe the economy is better when everyone has access. When everyone has room to grow. No one should be left out because the cost is too great or the technology too complex.",
+        "keyPoints": [
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+          "Consider UX from a user journey level across several brand touchpoints, as well as within specific interactions",
+          "Design at a systems level, where components can be re-used and built to scale, optimized across different screen sizes and devices",
+          "Iterate quickly and communicate ideas across various levels of fidelity, with the ability to receive feedback constructively as well as provide feedback to other’s work",
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+        ]
+      },
+      "requirements": [
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+      ]
+    }
+  ],
+  "BackEndEngineer": [
+    {
+      "title": "Back End Engineer",
+      "location": "Kuala Lumpur",
+      "positionStatus": "Contract",
+      "jobOverview": "Our DNA is made of digital natives with a strong track record in building digital products and experiences for top tier clients. We came together with one vision in mind: to build products that are beautiful, usable and effective. We don't make extravagant and overrated products and services. We build, prototype, test and repeat: perfecting our craft on a daily basis and ensuring we are building what's right for our clients. Our people are our secret weapon and we pride ourselves on strong collaboration within our team and with our clients.",
+      "responsibilities": {
+        "description": "We believe the economy is better when everyone has access. When everyone has room to grow. No one should be left out because the cost is too great or the technology too complex.",
+        "keyPoints": [
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+          "Consider UX from a user journey level across several brand touchpoints, as well as within specific interactions",
+          "Design at a systems level, where components can be re-used and built to scale, optimized across different screen sizes and devices",
+          "Iterate quickly and communicate ideas across various levels of fidelity, with the ability to receive feedback constructively as well as provide feedback to other’s work",
+          "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+        ]
+      },
+      "requirements": [
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform",
+        "Work through complex design problems to create beautiful and thoughtful interactions for our marketing web platform"
+      ]
+    }
+  ]
 }

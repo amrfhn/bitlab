@@ -13,11 +13,16 @@ $(function () {
     el: '#careerDetails',
     data: data,
     beforeCreate() {
+
+    },
+    mounted: function () {
       var keyparams = data.params;
       this.listings = careerListing;
-      this.listings = this.listings[keyparams]
-      console.log(data.message)
-    },
+      if (keyparams == null && window.location.href.indexOf("career-details.html") > -1) {
+        window.location.href = "/careers.html"
+      } else {
+        this.listings = this.listings[keyparams]
+      }
+    }
   })
-
-})
+});
