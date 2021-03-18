@@ -1,1 +1,3 @@
-import './careers.js'
+import './careers.js';
+import './blog.js';
+

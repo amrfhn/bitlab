@@ -4,7 +4,6 @@ Vue.config.devtools = true;
 $(function () {
 
   var data = {
-    message: 'Hello Vue!',
     params: new URL(location.href).searchParams.get('role'),
     listings: [],
   }
