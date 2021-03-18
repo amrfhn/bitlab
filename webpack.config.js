@@ -1,36 +1,36 @@
-const CopyPlugin =                require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const HandlebarsPlugin =          require('handlebars-webpack-plugin');
-const MiniCssExtractPlugin =      require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin =   require('optimize-css-assets-webpack-plugin');
-const TerserPlugin =              require('terser-webpack-plugin');
-const autoprefixer =              require('autoprefixer');
-const path =                      require('path');
+const HandlebarsPlugin = require('handlebars-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const path = require('path');
 
 const paths = {
   src: {
-    favicon:  './src/favicon',
-    fonts:    './src/fonts',
-    img:      './src/img',
-    js:       './src/js',
-    scss:     './src/scss',
-    video:   './src/video',
+    favicon: './src/favicon',
+    fonts: './src/fonts',
+    img: './src/img',
+    js: './src/js',
+    scss: './src/scss',
+    video: './src/video',
   },
   dist: {
-    css:      './assets/css',
-    favicon:  './assets/favicon',
-    fonts:    './assets/fonts',
-    img:      './assets/img',
-    js:       './assets/js',
-    video:   './assets/video',
+    css: './assets/css',
+    favicon: './assets/favicon',
+    fonts: './assets/fonts',
+    img: './assets/img',
+    js: './assets/js',
+    video: './assets/video',
   }
 }
 
 module.exports = {
   devtool: 'source-map',
   entry: {
-    'libs':       [paths.src.scss + '/libs.scss'],
-    'theme':      [paths.src.js + '/theme.js', paths.src.scss + '/theme.scss'],
+    'libs': [paths.src.scss + '/libs.scss'],
+    'theme': [paths.src.js + '/theme.js', paths.src.js + '/main.js', paths.src.scss + '/theme.scss'],
   },
   mode: 'development',
   module: {
@@ -69,8 +69,8 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          test:   /[\\/](node_modules)[\\/].+\.js$/,
-          name:   'vendor',
+          test: /[\\/](node_modules)[\\/].+\.js$/,
+          name: 'vendor',
           chunks: 'all'
         }
       }
@@ -111,30 +111,30 @@ module.exports = {
       patterns: [
         {
           from: paths.src.favicon,
-          to:   paths.dist.favicon,
+          to: paths.dist.favicon,
         },
         {
           from: paths.src.fonts,
-          to:   paths.dist.fonts,
+          to: paths.dist.fonts,
         },
         {
           from: paths.src.img,
-          to:   paths.dist.img,
+          to: paths.dist.img,
         },
         {
           from: paths.src.video,
-          to:   paths.dist.video,
+          to: paths.dist.video,
         },
       ],
     }),
     new HandlebarsPlugin({
-      entry:    path.join(process.cwd(), 'src', 'html', '**', '*.html'),
-      output:   path.join(process.cwd(), 'dist', '[path]', '[name].html'),
+      entry: path.join(process.cwd(), 'src', 'html', '**', '*.html'),
+      output: path.join(process.cwd(), 'dist', '[path]', '[name].html'),
       partials: [path.join(process.cwd(), 'src', 'partials', '**', '*.{html,svg}')],
       helpers: {
         is: function (v1, v2, options) {
-          const variants =  v2.split(' || ');
-          const isTrue =    variants.some(variant => v1 === variant);
+          const variants = v2.split(' || ');
+          const isTrue = variants.some(variant => v1 === variant);
 
           return isTrue ? options.fn(this) : options.inverse(this);
         },
@@ -146,7 +146,7 @@ module.exports = {
         },
       },
       onBeforeSave: function (Handlebars, resultHtml, filename) {
-        const level =     filename.split('//').pop().split('/').length;
+        const level = filename.split('//').pop().split('/').length;
         const finalHtml = resultHtml.split('{{webRoot}}').join('.'.repeat(level));
 
         return finalHtml;
