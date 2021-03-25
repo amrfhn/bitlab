@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> partials/head title="Landkit"}}
+  {{> partials/head title="Pricing"}}
 </head>
 
 <body class="pt-10">
@@ -15,7 +15,7 @@
   button="primary"}}
 
   <!-- WELCOME -->
-  <section class="py-8">
+  <section class="py-8" id="startPricing">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8 text-center">
@@ -38,7 +38,7 @@
 
           <!-- Button -->
           <p class="mb-7 mb-md-9" data-aos="fade-up" data-aos-delay="150">
-            <a class="btn btn-primary btn-lg shadow lift" href="#">
+            <a class="btn btn-primary btn-lg shadow lift" href="#" v-scroll-to="{el: '#pricingOptions', duration: 200, lazy: false, offset: -110, easing: 'linear',}">
               Pick Your Project <i class="fe fe-arrow-right ms-3"></i>
             </a>
           </p>
@@ -50,107 +50,1042 @@
   </section>
 
   <!-- CARD -->
-  <section class="py-8">
+  <section class="py-8" id="pricingOptions">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col">
+      <!-- SELECT PLATFORM -->
+      <div class="row row-cols-1 row-cols-md-4 g-4 pb-8">
+        <div class="col" v-for="item in projectBased" :key="item.key">
 
           <!-- Card -->
-          <div class="card card-border border-primary shadow-lg mb-6 mb-md-8 lift lift-lg h-100">
+          <div class="card shadow-lg mb-6 mb-md-8 lift lift-lg h-100" :style="{cursor: 'pointer'}"
+            @click="selectProjectBased(item.key)"
+            :class="[isActive && item.key == inputSelectedBased || item.key == inputSelectedBased ? 'card-border border-primary' : '']"
+            v-scroll-to="{el: '#selectOptions', duration: 500, lazy: true, offset: -50, easing: 'linear',}">
             <div class="card-body text-center pb-0">
 
               <!-- Icon -->
               <div class="icon mb-3">
-                {{> layout/website}}
+                <!-- {{> layout/website}} -->
+                <img :src="'assets/img/icons/'+item.icon+'.png'" :style="{width: '66px', height: 'auto'}"
+                  :alt="item.title+' icon'" />
               </div>
 
               <!-- Heading -->
               <h4 class="fw-bold">
-                Website
+                \{{ item.title }}
               </h4>
 
               <!-- Text -->
               <p class="text-gray-700 mb-5">
-                Integrate the latest technologies with an innovative platform that’s always.
+                \{{ item.bodyText }}
               </p>
 
             </div>
           </div>
 
         </div>
-        <div class="col">
+
+      </div> <!-- / .row -->
+
+      <!-- CUSTOMIZE -->
+      <div class="row pt-8 align-items-center gx-11" id="selectOptions">
+        <div class="col-md-6 ">
 
           <!-- Card -->
-          <div class="card card-border border-primary shadow-lg mb-6 mb-md-8 lift lift-lg h-100">
-            <div class="card-body text-center pb-0">
-
-              <!-- Icon -->
-              <div class="icon mb-3">
-                {{> layout/apps}}
-              </div>
+          <div class="card shadow-lg mb-6 mb-md-8 pb-lg-8 pb-2">
+            <div class="card-body text-center pb-lg-0">
 
               <!-- Heading -->
               <h4 class="fw-bold">
-                App
+                Customize Your Project
               </h4>
 
               <!-- Text -->
               <p class="text-gray-700 mb-5">
-                Integrate the latest technologies with an innovative platform that’s always.
+                Pick the complexity, project size and timeline.
               </p>
 
+              <div class="custom-price-container">
+
+                <div class="mb-lg-5 mb-2">
+                  <h4 class="text-start mb-lg-4 mb-1 fw-bolder">Complexity</h4>
+                  <div class="radio-toolbar d-flex justify-content-between">
+                    <div class="radio-wrapper w-100" v-for="(val, key) in projectComplexity" :key="val">
+                      <input type="radio" :id="key" name="project-complexity" :value="val" @change="$emit('input', val)"
+                        v-model="inputProjectComplexity">
+                      <label :for="key" v-html="key"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-lg-5 mb-2">
+                  <h4 class="text-start mb-lg-4 mb-1 fw-bolder">Project Size</h4>
+                  <div class="radio-toolbar d-flex justify-content-between">
+                    <div class="radio-wrapper w-100" v-for="(val, key) in projectSize" :key="val">
+                      <input type="radio" :id="key" name="project-size" :value="val" @change="$emit('input', val)"
+                        v-model="inputProjectSize">
+                      <label :for="key" v-html="key"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-lg-5 mb-2">
+                  <h4 class="text-start mb-lg-4 mb-1 fw-bolder">Speed</h4>
+                  <div class="radio-toolbar d-flex justify-content-between">
+                    <div class="radio-wrapper w-100" v-for="(val, key) in projectSpeed" :key="val">
+                      <input type="radio" :id="key" name="project-speed" :value="val" @change="$emit('input', val)"
+                        v-model="inputProjectSpeed">
+                      <label :for="key" v-html="key"></label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-
         </div>
-        <div class="col">
 
-          <!-- Card -->
-          <div class="card card-border border-primary shadow-lg mb-6 mb-md-8 lift lift-lg h-100">
-            <div class="card-body text-center pb-0">
+        <div class="col-md-6">
+          <div class="price-range-container mb-lg-8 mb-2">
+            <!-- Badge -->
+            <span class="badge rounded-pill bg-primary-soft px-3 px-lg-8 mb-lg-4 mb-1">
+              <span class="h6 text-uppercase fw-bold">From</span>
+            </span>
 
-              <!-- Icon -->
-              <div class="icon mb-3">
-                {{> layout/cart}}
+            <!-- PRICE RANGE - FROM -->
+            <!-- WEB -->
+            <div class="price-display" v-if="inputSelectedBased == 'web'">
+              <!-- WEBSITE | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">10,000</span></p>
               </div>
 
-              <!-- Heading -->
-              <h4 class="fw-bold">
-                E-Commerce
-              </h4>
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">9,000</span></p>
+              </div>
 
-              <!-- Text -->
-              <p class="text-gray-700 mb-5">
-                Integrate the latest technologies with an innovative platform that’s always.
-              </p>
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">8,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">20,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">18,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">16,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">30,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">27,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">24,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">20,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">18,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">16,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">30,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">27,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">24,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">90,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">81,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">72,000</span></p>
+              </div>
 
             </div>
+
+            <!-- APP -->
+            <div class="price-display" v-if="inputSelectedBased == 'app'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">20,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">18,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">16,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">72,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">64,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">180,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">162,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">144,000</span></p>
+              </div>
+
+            </div>
+
+            <!-- Ecommerce -->
+            <div class="price-display" v-if="inputSelectedBased == 'e-commerce'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">25,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">22,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">20,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">50,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">45,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">75,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">67,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">50,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">45,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">100,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">90,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">150,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">135,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">75,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">67,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">150,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">135,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">225,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">202,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">180,000</span></p>
+              </div>
+
+            </div>
+
+            <!-- CUSTOM DEV -->
+            <div class="price-display" v-if="inputSelectedBased == 'custom'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">35,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">31,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">28,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">70,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">63,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">56,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">105,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">94,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">84,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">70,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">63,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">56,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">140,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">126,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">112,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">210,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">189,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">168,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">105,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">94,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">84,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">210,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">189,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">168,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">315,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">283,500</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">252,000</span></p>
+              </div>
+
+            </div>
+
           </div>
 
-        </div>
-        <div class="col">
+          <div class="price-range-container">
+            <!-- Badge -->
+            <span class="badge rounded-pill bg-primary-soft px-3 px-lg-8 mb-lg-4 mb-1">
+              <span class="h6 text-uppercase fw-bold">To</span>
+            </span>
 
-          <!-- Card -->
-          <div class="card card-border border-primary shadow-lg mb-6 mb-md-8 mb-lg-0 lift lift-lg h-100">
-            <div class="card-body text-center pb-0">
-
-              <!-- Icon -->
-              <div class="icon mb-3">
-                {{> layout/customize}}
+            <!-- PRICE RANGE - TO -->
+            <!-- WEB -->
+            <div class="price-display" v-if="inputSelectedBased == 'web'">
+              <!-- WEBSITE | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">20,000</span></p>
               </div>
 
-              <!-- Heading -->
-              <h4 class="fw-bold">
-                Custom Development
-              </h4>
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">18,000</span></p>
+              </div>
 
-              <!-- Text -->
-              <p class="text-gray-700 mb-5">
-                Integrate the latest technologies with an innovative platform that’s always.
-              </p>
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">16,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">72,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">64,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">60,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">54,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">48,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">180,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">162,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">144,000</span></p>
+              </div>
 
             </div>
+
+            <!-- APP -->
+            <div class="price-display" v-if="inputSelectedBased == 'app'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">36,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">32,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">72,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">64,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">72,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">64,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">160,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">144,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">128,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">240,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">216,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">192,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">108,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">96,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">240,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">216,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">192,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">360,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">324,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">288,000</span></p>
+              </div>
+
+            </div>
+
+            <!-- Ecommerce -->
+            <div class="price-display" v-if="inputSelectedBased == 'e-commerce'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">50,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">45,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">40,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">100,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">90,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">150,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">135,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">100,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">90,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">80,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">200,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">180,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">160,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">300,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">270,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">240,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">150,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">135,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">120,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">300,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">270,000</span></p>
+              </div>
+
+              <div
+                v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">240,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">450,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">405,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">360,000</span></p>
+              </div>
+
+            </div>
+
+            <!-- CUSTOM DEV -->
+            <div class="price-display" v-if="inputSelectedBased == 'custom'">
+              <!-- APP | FROM -->
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">70,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">63,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">56,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">140,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">126,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">112,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">210,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">189,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'low' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">168,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">140,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">126,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">112,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">280,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">252,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">224,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">420,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">378,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'mid' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">336,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">210,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">189,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'small' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">168,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">420,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">378,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'medium' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">336,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '1'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">630,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '2'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">567,000</span></p>
+              </div>
+
+              <div v-show="inputProjectComplexity == 'high' && inputProjectSize == 'big' && inputProjectSpeed == '3'">
+                <p class="text-primary fw-bolder fs-3">RM <span class="fs-1 price-value">504,000</span></p>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
@@ -365,7 +1300,7 @@
 
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td>
 
@@ -403,7 +1338,7 @@
   </section>
 
   <!-- FOOTER -->
-  {{> partials/footer classList="bg-dark"}}
+  {{> partials/footer}}
 
   <!-- JAVASCRIPT -->
   {{> partials/scripts}}

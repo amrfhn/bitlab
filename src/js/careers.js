@@ -1,5 +1,4 @@
 import careerListing from "../data/careers.json";
-Vue.config.devtools = true;
 
 $(function () {
 
